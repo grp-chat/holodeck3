@@ -80,6 +80,15 @@ class GridSystem {
             {x:29, y:19, area: "area2"},
         ];
 
+        this.powerList = {
+            1: {powerName: "invisibility", duration: 10000, offPowerName: "invisibilityOff", title: "Invisibility"},
+            2: {powerName: "blink", title: "Blink"},
+        }
+        this.mapDefaultPowers = {
+            "area2": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],],
+            "area3": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],],
+        }
+
         this.startArea = "area2";
         this.defaultStartingPoints = {
             "area2": {"p1": {x:32,y:10}, "p2": {x:1,y:1}, "p3": {x:2,y:6}, "p4": {x:3,y:6}, "p5": {x:1,y:6}, "p6": {x:1,y:17}, "p7": {x:1,y:18}, "p8": {x:2,y:19}, "p9": {x:3,y:19}, "p10": {x:4,y:19}, "p11": {x:4,y:17},},
@@ -125,26 +134,37 @@ class GridSystem {
             this.item13 = new Item({itemLable: 2, itemId: "", color: "transparent", returnValue: false}),
         ];
 
-        this.powerList = {
-            1: {powerName: "invisibility", duration: 10000, offPowerName: "invisibilityOff", title: "Invisibility"},
-            2: {powerName: "blink", title: "Blink"},
-        }
+        
 
         this.playersArr.forEach((player) => {
             player.maxSteps = this.maxSteps;
             
             this.setStartingPointMultiLevel(player);
 
+            this.setStartingPowersMultiLevel(player);
+
             this.startingPoint(player);
         });
     }
 
+    setStartingPowersMultiLevel (player) {
+        player.obtainedPowers = [];
+        if (this.mapDefaultPowers[this.startArea] === undefined) return;
+
+        // const findThisObj = this.playersArr.find(obj => obj.id === player.id);
+        // const playerKey = Object.keys(this).find(key => this[key] === findThisObj);
+
+        this.mapDefaultPowers[this.startArea].forEach(power => {
+            player.obtainedPowers.push(power);
+        });
+
+    }
     setStartingPointMultiLevel (player) {
         if (this.defaultStartingPoints[this.startArea] === undefined) return;
 
         const findThisObj = this.playersArr.find(obj => obj.id === player.id);
         const playerKey = Object.keys(this).find(key => this[key] === findThisObj);
-        
+
         const {x, y} = this.defaultStartingPoints[this.startArea][playerKey];
         const values = [x, x, y, y];
         [player.x, player.originX, player.y, player.originY] = values;
@@ -365,8 +385,10 @@ class GridSystem {
         if (level > 5) {return}
         const levelSequence = {1:"area1", 2:"area2", 3:"area3", 4:"area4", 5:"area5"};
         this.playersArr.forEach((player) => {
+
             this.startArea = levelSequence[level];
             this.setStartingPointMultiLevel(player);
+            this.setStartingPowersMultiLevel(player);
 
             this.transitionToAnotherArea5(levelSequence[level], player);
             player.area = levelSequence[level];
