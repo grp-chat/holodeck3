@@ -85,12 +85,16 @@ class GridSystem {
             2: {powerName: "blink", title: "Blink"},
         }
         this.mapDefaultPowers = {
+            "area1": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[1],],
             "area2": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],],
             "area3": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],],
+            "area4": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[1],],
+            "area5": [this.powerList[2], this.powerList[2],this.powerList[2],this.powerList[2],this.powerList[1],],
         }
 
         this.startArea = "area2";
         this.defaultStartingPoints = {
+            "area1": {"p1": {x:32,y:19}, "p2": {x:1,y:10}, "p3": {x:1,y:11}, "p4": {x:1,y:12}, "p5": {x:1,y:13}, "p6": {x:1,y:14}, "p7": {x:1,y:15}, "p8": {x:1,y:16}, "p9": {x:1,y:17}, "p10": {x:1,y:18}, "p11": {x:1,y:19},},
             "area2": {"p1": {x:32,y:10}, "p2": {x:1,y:1}, "p3": {x:2,y:6}, "p4": {x:3,y:6}, "p5": {x:1,y:6}, "p6": {x:1,y:17}, "p7": {x:1,y:18}, "p8": {x:2,y:19}, "p9": {x:3,y:19}, "p10": {x:4,y:19}, "p11": {x:4,y:17},},
             "area3": {"p1": {x:32,y:19}, "p2": {x:16,y:16}, "p3": {x:16,y:17}, "p4": {x:16,y:18}, "p5": {x:16,y:19}, "p6": {x:8,y:1}, "p7": {x:9,y:1}, "p8": {x:5,y:1}, "p9": {x:4,y:1}, "p10": {x:3,y:1}, "p11": {x:2,y:1},},
             "area4": {"p1": {x:32,y:1}, "p2": {x:1,y:5}, "p3": {x:1,y:15}, "p4": {x:1,y:16}, "p5": {x:1,y:4}, "p6": {x:1,y:3}, "p7": {x:1,y:2}, "p8": {x:1,y:1}, "p9": {x:1,y:17}, "p10": {x:1,y:18}, "p11": {x:1,y:19},},
